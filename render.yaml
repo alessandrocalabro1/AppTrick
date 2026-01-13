@@ -1,0 +1,33 @@
+services:
+  # API Service (Backend)
+  - type: web
+    name: apptrick-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    repo: https://github.com/alessandrocalabro1/AppTrick
+    branch: main
+    rootDir: .
+    dockerfilePath: apps/api/Dockerfile
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: DATABASE_URL
+        value: file:./dev.db
+    healthCheckPath: /
+
+  # Web Service (Frontend) - Opzionale su Render, meglio su Vercel per performance
+  # Se vuoi deployare anche il frontend su Render, decommenta qui sotto.
+  # - type: web
+  #   name: apptrick-web
+  #   runtime: node
+  #   plan: free
+  #   region: frankfurt
+  #   buildCommand: cd apps/web && npm install && npm run build
+  #   startCommand: cd apps/web && npm start
+  #   envVars:
+  #     - key: NEXT_PUBLIC_API_URL
+  #       fromService:
+  #         type: web
+  #         name: apptrick-api
+  #         property: url
