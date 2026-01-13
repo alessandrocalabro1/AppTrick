@@ -47,7 +47,8 @@ export default function CreatePage() {
     const handleManualSubmit = async () => {
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:3001/projects', {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+            const res = await fetch(`${apiUrl}/projects`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -69,7 +70,8 @@ export default function CreatePage() {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:3001/projects', {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+            const res = await fetch(`${apiUrl}/projects`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt }),

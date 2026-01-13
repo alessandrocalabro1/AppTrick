@@ -17,8 +17,10 @@ export default function ProjectPage() {
     useEffect(() => {
         if (!id) return;
 
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
         // Fetch Project
-        fetch(`http://localhost:3001/projects`)
+        fetch(`${apiUrl}/projects`)
             .then(res => res.json())
             .then(projects => {
                 const found = projects.find((p: any) => p.id === id);
@@ -27,7 +29,7 @@ export default function ProjectPage() {
             .catch(err => console.error(err));
 
         // Fetch Files
-        fetch(`http://localhost:3001/projects/${id}/files`)
+        fetch(`${apiUrl}/projects/${id}/files`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -92,7 +94,7 @@ export default function ProjectPage() {
 
                         {project.status === 'COMPLETED' ? (
                             <a
-                                href={`http://localhost:3001/projects/${id}/download`}
+                                href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/projects/${id}/download`}
                                 className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-8 rounded-lg transition shadow-lg shadow-indigo-500/25"
                             >
                                 Download Source Code (ZIP)
