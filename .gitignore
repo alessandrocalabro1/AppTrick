@@ -1,0 +1,10 @@
+node_modules
+.turbo
+dist
+build
+.env
+.DS_Store
+coverage
+.svelte-kit
+.next
+out
